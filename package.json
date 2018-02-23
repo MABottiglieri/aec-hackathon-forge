@@ -1,0 +1,34 @@
+{
+  "name": "aec-hackathon-forge",
+  "version": "0.1.0",
+  "description": "Forge Viewer for AEC Hackathon 5.0 San Francisco Bay Area",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MABottiglieri/AEC-Hackathon-Forge.git"
+  },
+  "keywords": [
+    "projectMAB",
+    "AEC",
+    "Hackathon",
+    "NodeJs",
+    "API",
+    "BIM",
+    "DataBase",
+    "DB",
+    "mongoDB",
+    "Management",
+    "Chart",
+    "Forge",
+    "Autodesk"
+  ],
+  "author": "Manuel André Bottiglieri",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MABottiglieri/AEC-Hackathon-Forge/issues"
+  },
+  "homepage": "https://github.com/MABottiglieri/AEC-Hackathon-Forge#readme"
+}
