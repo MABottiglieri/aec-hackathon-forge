@@ -13,7 +13,8 @@
     <!-- Favicon -->
     <link rel="icon" href="img/logos/favicon.png" sizes="16x16" type="image/x-icon">
     <!-- Forge CSS -->
-    <link href="https://developer.api.autodesk.com/derivativeservice/v2/viewers/style.min.css?v=v2.16.1" rel="stylesheet" type="text/css">
+    <!--per vedere le versioni disponibili del viewer https://developer.api.autodesk.com/derivativeservice/v2/viewers (le versioni fino alla 13 verranno soppresse presto)-->
+    <link href="https://developer.api.autodesk.com/derivativeservice/v2/viewers/style.min.css?v=v4.0" rel="stylesheet" type="text/css"> <!--  v=v2.16.1 -->
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- BootstrapTable CSS -->
@@ -36,10 +37,11 @@
             <div id="home-link" class="nav-link pointer" onclick="location.reload()">Home</div>
           </li>
           <li id="navbarDropdown" class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Extensions</a>
             <div id="navbarDropdown-menu" class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="dropdown-item pointer" onclick="">model 1</div>
-              <div class="dropdown-item pointer" onclick="">model 2</div>
+              <div id="viewer-extension-collaborate" class="dropdown-item pointer" onclick="">Collaborate</div>
+              <div id="viewer-extension-markup3D" class="dropdown-item pointer" onclick="">Markup3D</div>
+              <div id="viewer-extension-translate" class="dropdown-item pointer" onclick="">Translate</div>
             </div>
           </li>
         </ul>
@@ -47,14 +49,15 @@
     </nav>
     <!-- Viewer container -->
     <div class="container-fluid">
-      <div id="MyViewerDiv" class="Viewer row"></div><!--Viewer-->
+      <div id="MyViewer" class="Viewer row"></div><!--Viewer-->
     </div><!--Viewer Container-->
 
 
     <!-- Optional JavaScript -->
     <!-- Forge JavaScript -->
-    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/three.min.js?v=v2.16.1"></script>
-    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/viewer3D.min.js?v=v2.16.1"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js?v=v4.0"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v4.0"></script>
+
     <!--  Angula JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" type="text/javascript"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JavaScript -->
@@ -69,6 +72,8 @@
     <script src="/js/chartjs-plugin-annotation.js"></script>
     <!-- projectMAB JavaScript -->
     <script src="/js/viewer.js"></script>
+    <script src="/js/Autodesk.ADN.Viewing.Extension/Viewing.Extension.Markup3D.min.js"></script>
+    <script src="/js/Autodesk.ADN.Viewing.Extension/Viewing.Extension.Transform.min.js"></script>
     <script></script>
   </body>
 </html>

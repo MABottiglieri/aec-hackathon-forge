@@ -9,7 +9,7 @@ const fs = require('fs');
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-const http = require('http');
+
 //ForgeSDK
 const ForgeSDK = require('forge-apis');
 var autoRefresh = true; // or false
