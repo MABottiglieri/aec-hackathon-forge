@@ -2,23 +2,22 @@ console.log('starting viewer');
 var initOptions = Autodesk.Viewing.createInitializerOptions();
 
 var viewer;
-var documntIdWebModel01 = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2NodXJjaF9ob2xlLnppcA'; //church_hole.zip     2017/08/11
-var documntIdWebModel02 = 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA'; //iron-man-helmet.zip     2017/08/11
+
 var documentIds = [
-    { "description": "documntIdWebModel01", "urn": documntIdWebModel02 }, // documentId0em, documentIdDEGW01, documentId_People01, documntIdWebModel01, documentId0ezip
-    { "description": "documntIdWebModel02", "urn": documntIdWebModel02 },
-    { "description": "documntIdWebModel03", "urn": documntIdWebModel02 },
-    { "description": "documntIdWebModel04", "urn": documntIdWebModel02 }
+    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
+    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
+    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
+    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' }
 ];
 var CustomGlobalOffset = [
     { x: 0, y: 0, z: 0 },
     { x: 100, y: 0, z: 100 },
     { x: -100, y: 0, z: 100 },
     { x: 0, y: 0, z: 200 }
-]; //il segno delle coordinate è contrario alla direzione degli assi visualizzati
+];
 var documentIndex = 0;
 var OnDocumentIdLoaded = [
-    onLastDocLoaded, //onDoc0Loaded
+    onDoc0Loaded, //onDoc0Loaded
     onDoc1Loaded, //onDoc1Loaded
     onDoc2Loaded,  //onDoc2Loaded
     onLastDocLoaded
