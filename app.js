@@ -1,7 +1,7 @@
 console.log('app.js started');
 //config
-const {clientId} = require('./config/config'); console.log('clientId ',clientId);
-const {secretKey} = require('./config/config'); console.log('secretKey ',secretKey);
+const {client_id} = require('./config/config');
+const {client_secret} = require('./config/config');
 //node_modules
 const express = require('express');
 const hbs = require('hbs');
@@ -9,6 +9,17 @@ const fs = require('fs');
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const http = require('http');
+//ForgeSDK
+const ForgeSDK = require('forge-apis');
+var autoRefresh = true; // or false
+var scope = ['data:read','data:write','viewables:read'];
+var oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(client_id, client_secret, scope, autoRefresh);
+
+oAuth2TwoLegged.authenticate().then(function(credentials){
+  // The `credentials` object contains an access_token that is being used to call the endpoints.
+  // In addition, this object is applied globally on the oAuth2TwoLegged client that you should use when calling secure endpoints.
+}, function(err){ console.error(err) });
 
 const port = process.env.PORT || 3000;
 hbs.registerPartials(__dirname + '/views/partials');
@@ -34,6 +45,9 @@ app.get('/',(req,res) =>{
 
 app.get('/viewer', (req, res) => {  //startPage
   res.render('viewer.hbs');
+});
+app.get('/getAccessToken', (req, res) => {  //startPage
+  res.send(oAuth2TwoLegged.credentials);
 });
 
 app.listen(port, () => {

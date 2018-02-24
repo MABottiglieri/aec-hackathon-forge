@@ -36,7 +36,7 @@ input{ font-family: FuturaStd-Book }
 }
 
 #ViewerModelStructurePanel.dockingPanel, #in-viewer-search.dockingPanel {
-    /* top: 60px; */
+    top: 60px;
 }
 
 /*----- Viewer & Containers --------------------------------------*/
