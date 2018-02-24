@@ -11,7 +11,9 @@
     <meta name="keywords" content="projectMAB, AEC, Hackathon, NodeJs, API, BIM, DataBase, DB, mongoDB, Management, Chart, Forge, Autodesk">
     <meta name="description" content="Forge viewer App for AEC Hackathon 5.0 - San Francisco Bay Area">
     <!-- Favicon -->
-    <link rel="icon" href="http://aechackathon.com/wp-content/themes/khore/favicon.ico" sizes="16x16" type="image/x-icon">
+    <link rel="icon" href="img/logos/favicon.png" sizes="16x16" type="image/x-icon">
+    <!-- Forge CSS -->
+    <link href="https://developer.api.autodesk.com/derivativeservice/v2/viewers/style.min.css?v=v2.16.1" rel="stylesheet" type="text/css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <!-- BootstrapTable CSS -->
@@ -23,8 +25,8 @@
 
   <body>
     <!-- navigationBar -->
-    <nav id="content-top-bar" class="navbar navbar-expand-lg fixed-top navbar-light">
-      <img id="logo" class="col-auto img-fluid" src="img/loghi/Lombardini22.png" alt="company logo">
+    <nav id="content-top-bar" class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <img id="logo" class="col-auto img-fluid" src="img/logos/Adsk_ADN_AuthorizedD_M_Color_Wht.png" alt="company logo">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -36,24 +38,78 @@
           <li id="navbarDropdown" class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div id="navbarDropdown-menu" class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <div class="dropdown-item pointer" onclick="changeView('#TimeSheet')">TimeSheet</div>
+              <div class="dropdown-item pointer" onclick="">model 1</div>
+              <div class="dropdown-item pointer" onclick="">model 2</div>
             </div>
-          </li>
-          <li>
-            <a class="navbar-brand" href="/timesheet">
-              <img id="logout" src="/img/icons/logout.svg" width="30" height="30" class="d-inline-block align-top col-auto rounded" alt="">
-            </a>
           </li>
         </ul>
       </div>
     </nav>
+    <!-- Viewer container -->
+    <div class="container" id="ViewerContainer">
+      <div class="Viewer" id="MyViewerDiv">
+        <div id="L22_ToolBar" class="Shadow">
+          <div class="L22_ToolBar_Button" onclick="ToggleHide('guiviewer3d-toolbar')">
+            <div class="L22_ToolBar_Button_icon" id="ShowMainToolbar" style="background-image: url('/img/icons/plus.svg')"></div>
+          </div><!--ShowMainToolbar-->
+          <div class="L22_ToolBar_Button" onclick="showPanel('MAP'), viewer.showViewCubeTriad(true)"> <!--ToggleHide('MAP')-->
+            <div class="L22_ToolBar_Button_icon" id="ToggleMAP" style="background-image: url('/img/icons/Map.png')"></div>
+          </div><!--ToggleMAP-->
+          <div class="L22_ToolBar_Button Hide" id="SpreadSheetPanel" onclick="showPanel('L22 Docking Panel');LoadSpreadsheetData()">
+            <div class="L22_ToolBar_Button_icon" id="ViewListButton" style="background-image: url('/img/icons/list.svg')"></div>
+          </div><!--ViewList-->
+          <div class="L22_ToolBar_Button" onclick="ToggleHide('PropertiesFilter')">
+            <div class="L22_ToolBar_Button_icon" id="PropertiesFilterButton" style="background-image: url('/img/icons/Search.svg')"></div>
+          </div><!--PropertiesFilterButton-->
+          <div class="L22_ToolBar_Button" onclick="ToggleHide('KeynotesFilter')">
+            <div class="L22_ToolBar_Button_icon" id="KeynoteFilterButton" style="background-image: url('/img/icons/materials.svg')"></div>
+          </div><!--Keynotes-->
+          <div class="L22_ToolBar_Button" onclick="viewer.fitToView(viewer.getSelection())">
+            <div class="L22_ToolBar_Button_icon" id="zoomSelected" style="background-image: url('/img/icons/zoomSelected.svg')"></div>
+          </div><!--zoomSelected-->
+          <div class="L22_ToolBar_Button" onclick="showPanel('L22 Docking Panel')">
+            <div class="L22_ToolBar_Button_icon" id="ButtonForTest" style="background-image: url('/img/icons/test.svg')"></div>
+          </div><!--ButtonForTest-->
+        </div><!--L22 Toolbar-->
+        <form id="PropertiesFilter" class="Hide">
+          <div id="SearchFilter_01" class="Block">
+            <select id="FormSelector01" name="SystemClassification" onchange='searchIsolate(this.value, searchAttributes[1]), newFilterProperties(this.value, searchAttributes[1], searchAttributes[2], GetPropertiesFilter02)'></select>
+            <div class="inlineBlock">System Classification</div>
+          </div>
+          <div id="SearchFilter_02" class="Block Hide">
+            <select id="FormSelector02" name="input-SystemName" onchange='searchIsolate(this.value, searchAttributes[2]), newFilterProperties(this.value, searchAttributes[2], searchAttributes[0], GetPropertiesFilter03)'></select>
+            <div class="inlineBlock">System Type</div>
+          </div>
+          <div id="SearchFilter_03" class="Block Hide">
+            <select id="FormSelector03" name="input-SystemName" onchange="searchIsolate(this.value, searchAttributes[0])"></select>
+            <div class="inlineBlock">System Name</div>
+          </div>
+          <div id="SearchReset" class="Block">
+            <!--<input type="submit">-->
+            <input type="reset">
+          </div>
+        </form><!--PropertiesFilter-->
+        <form id="KeynotesFilter" class="Hide">
+          <div id="KeynoteFilter_01" class="Block">
+            <select id="KeynoteSelector01" name="input-Keynotes01" onchange='searchIsolate(this.value, searchAttributes[3])'></select>
+            <div class="inlineBlock">Keynotes</div>
+          </div>
+        </form><!--KeynotesFilter-->
+      </div><!--Viewer-->
+    </div><!--Viewer Container-->
+
 
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <!-- Forge JavaScript -->
+    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/three.min.js?v=v2.16.1"></script>
+    <script src="https://developer.api.autodesk.com/derivativeservice/v2/viewers/viewer3D.min.js?v=v2.16.1"></script>
+    <!--  Angula JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js" type="text/javascript"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JavaScript -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- SRC BootstrapTable -->
+    <!-- BootstrapTable JavaScript-->
     <script src="/src/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="/src/bootstrap-table/1.11.1/locale/bootstrap-table-en-US.min.js"></script>
     <!-- Chart.js JavaScript -->
