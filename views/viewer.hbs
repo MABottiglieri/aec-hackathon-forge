@@ -36,9 +36,16 @@
           <li class="nav-item">
             <div id="home-link" class="nav-link pointer" onclick="location.reload()">Home</div>
           </li>
-          <li id="navbarDropdown" class="nav-item dropdown">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Menu</a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <div id="upload-translate" class="dropdown-item pointer" onclick="">Upload and Translate</div>
+              <div id="models-list" class="dropdown-item pointer" onclick="">My Models</div>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Extensions</a>
-            <div id="navbarDropdown-menu" class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <div id="viewer-extension-collaborate" class="dropdown-item pointer" onclick="">Collaborate</div>
               <div id="viewer-extension-markup3D" class="dropdown-item pointer" onclick="">Markup3D</div>
               <div id="viewer-extension-translate" class="dropdown-item pointer" onclick="">Translate</div>

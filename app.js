@@ -9,17 +9,23 @@ const fs = require('fs');
 const _ = require('lodash');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
-
-//ForgeSDK
 const ForgeSDK = require('forge-apis');
+
 var autoRefresh = true; // or false
 var scope = ['data:read','data:write','viewables:read'];
-var oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(client_id, client_secret, scope, autoRefresh);
+var redirect_url = 'https://aec-hackathon-forge.herokuapp.com/viewer';
 
-oAuth2TwoLegged.authenticate().then(function(credentials){
-  // The `credentials` object contains an access_token that is being used to call the endpoints.
-  // In addition, this object is applied globally on the oAuth2TwoLegged client that you should use when calling secure endpoints.
-}, function(err){ console.error(err) });
+var oAuth2TwoLegged = new ForgeSDK.AuthClientTwoLegged(client_id, client_secret, scope, autoRefresh);
+oAuth2TwoLegged.authenticate().then(function(credentials){ }, function(err){ console.error(err) });
+
+var oAuth2ThreeLegged = new ForgeSDK.AuthClientThreeLegged(client_id, client_secret, redirect_url, scope, autoRefresh);
+var AuthUrl = oAuth2ThreeLegged.generateAuthUrl();
+console.log('oAuth2ThreeLegged.generateAuthUrl(): ',oAuth2ThreeLegged.generateAuthUrl());
+// oAuth2ThreeLegged.getToken(authorizationCode).then(function (credentials) {
+//     // The `credentials` object contains an `access_token` and an optional `refresh_token` that you can use to call the endpoints.
+// }, function(err){
+//     console.error(err);
+// });
 
 const port = process.env.PORT || 3000;
 hbs.registerPartials(__dirname + '/views/partials');
@@ -42,7 +48,10 @@ app.get('/',(req,res) =>{
     startPage:"/viewer"
   });
 });
-
+app.get('/login', (req, res) => {  //startPage
+  var AuthUrl = oAuth2ThreeLegged.generateAuthUrl();
+  res.send(AuthUrl);
+});
 app.get('/viewer', (req, res) => {  //startPage
   res.render('viewer.hbs');
 });

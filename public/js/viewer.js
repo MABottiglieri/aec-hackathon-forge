@@ -107,6 +107,7 @@ function onLastDocLoaded() {
     console.log("GEOMETRY_LOADED_EVENT (onLastDocLoaded) (" + documentName + ")");
     viewer.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT, OnObjectTreeCreated);
     startDate = new Date; $(".spinner").addClass("Show");
+    activateTwoSidedRendering();
 };
 
 function OnObjectTreeCreated() {
@@ -139,15 +140,7 @@ function HowMuchTime(currentDate, currentText) {
     $(".spinner").removeClass("Show");
 };
 
-function activateTwoSidedRendering() {
-    var materials = viewer.impl.matman()._materials;
-    for (var matKey in materials) {
-        materials[matKey].side = THREE.DoubleSide;
-        materials[matKey].needsUpdate = true;
-    }; console.log("materials updated: ",materials);
 
-    viewer.impl.renderer().toggleTwoSided(true);
-};
 
 function getAccessToken(callback){
   $.get('/getAccessToken', function(options) {
@@ -166,6 +159,15 @@ function toggleViewerExtension(buttonId,extension,action){
       break;
   };
 }
+function activateTwoSidedRendering() {
+    var materials = viewer.impl.matman()._materials;
+    for (var matKey in materials) {
+        materials[matKey].side = THREE.DoubleSide;
+        materials[matKey].needsUpdate = true;
+    }; console.log("materials updated: ",materials);
+
+    viewer.impl.renderer().toggleTwoSided(true);
+};
 // $.post('/updateRecord', recordToUpdate, function(response) {
 //   console.log("response: ",response);
 // },'json');
