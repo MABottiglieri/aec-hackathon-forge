@@ -46,56 +46,8 @@
       </div>
     </nav>
     <!-- Viewer container -->
-    <div class="container" id="ViewerContainer">
-      <div class="Viewer" id="MyViewerDiv">
-        <div id="L22_ToolBar" class="Shadow">
-          <div class="L22_ToolBar_Button" onclick="ToggleHide('guiviewer3d-toolbar')">
-            <div class="L22_ToolBar_Button_icon" id="ShowMainToolbar" style="background-image: url('/img/icons/plus.svg')"></div>
-          </div><!--ShowMainToolbar-->
-          <div class="L22_ToolBar_Button" onclick="showPanel('MAP'), viewer.showViewCubeTriad(true)"> <!--ToggleHide('MAP')-->
-            <div class="L22_ToolBar_Button_icon" id="ToggleMAP" style="background-image: url('/img/icons/Map.png')"></div>
-          </div><!--ToggleMAP-->
-          <div class="L22_ToolBar_Button Hide" id="SpreadSheetPanel" onclick="showPanel('L22 Docking Panel');LoadSpreadsheetData()">
-            <div class="L22_ToolBar_Button_icon" id="ViewListButton" style="background-image: url('/img/icons/list.svg')"></div>
-          </div><!--ViewList-->
-          <div class="L22_ToolBar_Button" onclick="ToggleHide('PropertiesFilter')">
-            <div class="L22_ToolBar_Button_icon" id="PropertiesFilterButton" style="background-image: url('/img/icons/Search.svg')"></div>
-          </div><!--PropertiesFilterButton-->
-          <div class="L22_ToolBar_Button" onclick="ToggleHide('KeynotesFilter')">
-            <div class="L22_ToolBar_Button_icon" id="KeynoteFilterButton" style="background-image: url('/img/icons/materials.svg')"></div>
-          </div><!--Keynotes-->
-          <div class="L22_ToolBar_Button" onclick="viewer.fitToView(viewer.getSelection())">
-            <div class="L22_ToolBar_Button_icon" id="zoomSelected" style="background-image: url('/img/icons/zoomSelected.svg')"></div>
-          </div><!--zoomSelected-->
-          <div class="L22_ToolBar_Button" onclick="showPanel('L22 Docking Panel')">
-            <div class="L22_ToolBar_Button_icon" id="ButtonForTest" style="background-image: url('/img/icons/test.svg')"></div>
-          </div><!--ButtonForTest-->
-        </div><!--L22 Toolbar-->
-        <form id="PropertiesFilter" class="Hide">
-          <div id="SearchFilter_01" class="Block">
-            <select id="FormSelector01" name="SystemClassification" onchange='searchIsolate(this.value, searchAttributes[1]), newFilterProperties(this.value, searchAttributes[1], searchAttributes[2], GetPropertiesFilter02)'></select>
-            <div class="inlineBlock">System Classification</div>
-          </div>
-          <div id="SearchFilter_02" class="Block Hide">
-            <select id="FormSelector02" name="input-SystemName" onchange='searchIsolate(this.value, searchAttributes[2]), newFilterProperties(this.value, searchAttributes[2], searchAttributes[0], GetPropertiesFilter03)'></select>
-            <div class="inlineBlock">System Type</div>
-          </div>
-          <div id="SearchFilter_03" class="Block Hide">
-            <select id="FormSelector03" name="input-SystemName" onchange="searchIsolate(this.value, searchAttributes[0])"></select>
-            <div class="inlineBlock">System Name</div>
-          </div>
-          <div id="SearchReset" class="Block">
-            <!--<input type="submit">-->
-            <input type="reset">
-          </div>
-        </form><!--PropertiesFilter-->
-        <form id="KeynotesFilter" class="Hide">
-          <div id="KeynoteFilter_01" class="Block">
-            <select id="KeynoteSelector01" name="input-Keynotes01" onchange='searchIsolate(this.value, searchAttributes[3])'></select>
-            <div class="inlineBlock">Keynotes</div>
-          </div>
-        </form><!--KeynotesFilter-->
-      </div><!--Viewer-->
+    <div class="container-fluid">
+      <div id="MyViewerDiv" class="Viewer row"></div><!--Viewer-->
     </div><!--Viewer Container-->
 
 
