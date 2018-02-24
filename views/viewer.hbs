@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <!-- Other meta tags -->
-    <meta name="author" content="projectMAB">
+    <meta name="author" content="Manuel André Bottiglieri">
     <meta name="keywords" content="projectMAB, AEC, Hackathon, NodeJs, API, BIM, DataBase, DB, mongoDB, Management, Chart, Forge, Autodesk">
     <meta name="description" content="Forge viewer App for AEC Hackathon 5.0 - San Francisco Bay Area">
     <!-- Favicon -->
     <link rel="icon" href="http://aechackathon.com/wp-content/themes/khore/favicon.ico" sizes="16x16" type="image/x-icon">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <!-- SRC BootstrapTable -->
+    <!-- BootstrapTable CSS -->
     <link rel="stylesheet" href="/src/bootstrap-table/1.11.1/bootstrap-table.min.css"/>
-    <!-- Lombardini22 CSS -->
+    <!-- ProjectMAB CSS -->
     <link href="css/viewer.css" rel="stylesheet" />
-    <title>TimeSheet</title>
+    <title>Viewer</title>
   </head>
 
   <body>
@@ -47,287 +47,20 @@
         </ul>
       </div>
     </nav>
-    <!-- timesheetUser -->
-    <div id="TimeSheet" class="container-fluid col-12 col-lg-8">
-      <!-- content-main -->
-      <div id="content-main" class="row">
-        <div id="content-main-left" class="col-sm-4 col-xs-12 rounded">
-          <div id="content-user" class="row rounded">
-            <div id="imageProfile">
-              <img src="{{imageProfile}}" class="img-fluid" alt="image profile"/>
-              <div id="user" class="col-12 user-element orange">{{userName}}</div>
-              <div id="area" class="col-12 user-element orange">{{area}}</div>
-            </div>
-          </div>
-          <div id="content-chart" class="row rounded light">
-            <div id="content-data-chart" class="col"></div>
-            <div class="input-group no-gutters ">
-              <div class="input-group-prepend col">
-                <div class="pl-1 pr-1">Dal</div>
-                <select id="filter-chart-year" class="form-control user-commesse" title="Anno"></select>
-                <select id="filter-chart-month" class="form-control user-commesse" title="Mese"></select>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="content-main-right" class="col-sm-8 col-xs-12 rounded unselectable">
-          <div class="container light">
-            <div id="week-headers" class="row align-items-center">
-              <div class="col d-inline calendar-header">Mon</div>
-              <div class="col d-inline calendar-header">Tue</div>
-              <div class="col d-inline calendar-header">Wed</div>
-              <div class="col d-inline calendar-header">Thu</div>
-              <div class="col d-inline calendar-header">Fri</div>
-              <div class="col d-inline ml-2 calendar-header">Sat</div>
-              <div class="col d-inline calendar-header">Sun</div>
-            </div>
-          </div>
-          <div id="content-calendar" class="container light"></div>
-        </div>
-      </div>
-      <div id="content-data-read" class="row rounded">
-        <div class="col-12">Info</div>
-        <div id="content-data-read-top" class="col-12"></div>
-        <div id="content-data-read-bottom" class="container col-12"></div>
-      </div>
-      <!-- content-footer ok -->
-      <div id="content-footer" class="row">
-        <div id="createdby" class="col-12">Created by Lombardini22 - &copy; 2018</div>
-      </div>
-      <!-- button-data-add ok-->
-      <div class="row fixed-bottom no-gutters unselectable">
-        <div class="col-0 col-lg-2 d-none d-lg-inline"></div>
-        <div id="button-data-add" class="col-12 col-lg-8 rounded cyan">+</div>
-        <div class="col-0 col-lg-2 d-none d-lg-inline"></div>
-      </div>
-      <!-- content-data-insert -->
-      <div id="content-data-insert" class="row no-gutters fixed-bottom d-none">
-        <div class="col-0 col-lg-2 d-none d-lg-inline"></div>
-        <div class="col-12 col-lg-8 rounded cyan">
-          <div id="data-insert-top" class="row no-gutters mx-1 mt-1 mb-2">
-            <div id="data-insert-calendar" class="row no-gutters mr-auto"></div>
-            <div class="col-auto">
-              <img id="data-insert-button-close" class="rounded" src="/img/icons/close.svg" onclick="" title="Close" alt="Close">
-            </div>
-          </div>
-          <div id="data-insert-core" class="row no-gutters mx-2 mb-2">
-            <div id="data-insert-inputs" class="col mb-2">
-                <div class="input-group no-gutters mb-1">
-                  <div class="input-group-prepend col">
-                    <img id="job-reset" class="btn btn-default glyphIcon" title="reset job" src="/img/icons/octicons/sync.svg" alt=""/>
-                    <img id="job-filter" class="btn btn-default" title="job list" data-toggle="modal" data-target="#modal-job" onclick="setJobTable('#modal-job-table','#table-jobs',jobHeaders,'jobs')" src="/img/icons/octicons/search.svg" alt=""/>
-                    <input id="data-insert-job" class="form-control" list="datalist-jobs" placeholder="Commessa">
-                    <datalist id="datalist-jobs"></datalist>
-                  </div>
-                </div>
-                <div class="input-group no-gutters ">
-                  <div class="input-group-prepend col">
-                    <select id="data-insert-activity" class="form-control"></select>
-                  </div>
-                </div>
-            </div>
-            <div id="data-insert-hours" class="col-auto ml-1 rounded">
-              <div id="data-insert-hours-text" class="">Ore</div>
-              <input id="data-insert-hours-number" class="rounded" type="number" min="1">
-            </div>
-          </div>
-          <div id="data-insert-bottom" class="row no-gutters mx-2 mb-1">
-            <div id="data-insert-note" class="col no-gutters">
-              <div id="data-insert-note-label" class="row no-gutters">Note:</div>
-              <div class="row no-gutters">
-                <textarea id="data-insert-note-text" placeholder="inserire le note..." class="col"></textarea>
-                <button type="button" id="data-insert-button-save" class="btn btn-default col-auto ml-1" title="Save data" onclick="">
-                  <img src="/img/icons/octicons/check.svg" class="" alt="save button">
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-0 col-lg-2 d-none d-lg-inline"></div>
-      </div>
-      <!-- Modal -->
-      <div class="modal fade" id="modal-job" tabindex="-1" role="dialog" aria-labelledby="modal-job-LongTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div id="modal-job-header-table" class="modal-header"><!-- Modal header -->
-              <h5 class="modal-title" id="modal-job-LongTitle"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div id="modal-job-table" class="modal-body"></div><!-- Modal Table -->
-            <div class="modal-footer"><!-- Modal footer -->
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- timesheetAdmin -->
-    <div id="Amministrazione" class="container-fluid col-12 d-none">
-      <div class="container col-12 col-lg-8 mb-2 pb-1 rounded gray01"><!-- Utenti -->
-        <div class="col-12 py-1 mb-1 h6">Utenti <span id="badge-utenti" class="badge badge-info"></span></div>
-        <div class="col-12 py-1 mb-1 rounded light">Attivi <span id="badge-utenti-attivi" class="badge badge-success"></span>
-          <button type="button" class="btn btn-info col-12 mb-1" data-toggle="modal" data-target="#modal-users" onclick="setUserTable('#modal-users-table','#table-users',userHeaders,'attivi')">visualizza</button>
-        </div>
-        <div class="col-12 py-1 mb-1 rounded light">Ritardatari <span id="badge-utenti-ritardatari" class="badge badge-warning"></span>
-          <button type="button" class="btn btn-info col-12 mb-1" data-toggle="modal" data-target="#modal-users" onclick="setUserTable('#modal-users-table','#table-users',userHeaders,'ritardatari')">visualizza</button>
-          <button type="button" class="btn btn-info col-12 mb-1">invia email (a tutti)</button>
-        </div>
-        <div class="col-12 py-1 mb-1 rounded light">In sospeso <span id="badge-utenti-inSospeso" class="badge badge-warning"></span>
-          <button type="button" class="btn btn-info col-12 mb-1" data-toggle="modal" data-target="#modal-users" onclick="setUserTable('#modal-users-table','#table-users',userHeaders,'inSospeso')">aggiorna email</button>
-        </div>
-      </div>
-      <div class="container col-12 col-lg-8 mb-2 pb-1 rounded gray01"><!-- Commesse -->
-        <div class="col-12 py-1 mb-1 h6">Commesse <span id="badge-commesse" class="badge badge-info"></span></div>
-        <div class="col-12 py-1 mb-1 rounded light">Attive
-          <!-- <button type="button" class="btn btn-info col-12 mb-1" data-toggle="modal" data-target="#modal-job" onclick="setJobTable('#modal-job-table','#table-jobs',jobHeaders,'jobs')">visualizza</button> -->
-        </div>
-      </div>
-      <div class="container col-12 col-lg-8 mb-2 pb-1 rounded gray01"><!-- Importa -->
-        <div class="col-12 py-1 mb-1 h6">Importa</div>
-        <div class="col-12 py-1 mb-1 rounded light">Utenti
-          <button id="importa-utenti" type="button" class="btn btn-secondary col-12 mb-1" onclick="updateUsers(this)">importa</button>
-          <div id="progress-importa-utenti" class="progress d-none">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </div>
-        <div class="col-12 py-1 mb-1 rounded light">Commesse
-          <button id="importa-commesse" type="button" class="btn btn-secondary col-12 mb-1" onclick="updateJobs(this)">importa</button>
-          <div id="progress-importa-commesse" class="progress d-none">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </div>
-      </div>
-      <div class="container col-12 col-lg-8 mb-2 pb-1 rounded gray01"><!-- Esporta -->
-        <div class="col-12 py-1 mb-1 h6">Esporta</div>
-        <div class="col-12 py-1 mb-2 rounded light">Sincronizza i nuovi dati su adHoc <span id="badge-nuoviRecord" class="badge badge-info"></span>
-          <button id="esporta-record" type="button" class="btn btn-secondary col-12 mb-1" onclick="storeRecords(this)">Esporta</button>
-          <div id="progress-esporta-record" class="progress d-none">
-            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
-          </div>
-        </div>
-      </div>
-      <div class="container col-12 col-lg-8 mb-2 pb-1 rounded gray01"><!-- Email Automatiche -->
-        <div class="col-12 py-1 mb-1 h6">Notifiche</div>
-        <div class="col-12 py-1 mb-2 rounded light">Email automatiche
-          <div class="input-group mb-1">
-            <div class="input-group-prepend">
-              <div class="input-group-text col">abilita
-                <input id="config-email-disabled" type="checkbox">
-              </div>
-            </div>
-            <label class="input-group-text ml-2" for="config-email-lag">ritardo</label>
-            <select id="config-email-lag" class="custom-select col">
-              <option value="1">1 giorno</option>
-              <option value="2">2 giorni</option>
-              <option value="3">3 giorni</option>
-              <option value="4">4 giorni</option>
-              <option value="5">5 giorni</option>
-              <option value="6">6 giorni</option>
-              <option selected value="7">7 giorni</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <!-- Modal -->
-      <div class="modal fade" id="modal-users" tabindex="-1" role="dialog" aria-labelledby="modal-users-LongTitle" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-          <div class="modal-content">
-            <div id="modal-users-header-table" class="modal-header"><!-- Modal header -->
-              <h5 class="modal-title" id="modal-users-LongTitle">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div id="modal-users-table" class="modal-body"></div><!-- Modal Table -->
-            <div class="modal-footer"><!-- Modal footer -->
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <!-- timesheetPL -->
-    <div id="PL" class="container-fluid col-12 d-none">
-      <div class="card"><!-- Commesse -->
-        <div class="card-header light px-0 py-0" id="heading-pl-commesse">
-          <h5 class="mb-0">
-            <button class="btn col-12 light" data-toggle="collapse" data-target="#collapse-pl-commesse" aria-expanded="false" aria-controls="collapse-pl-commesse">Commesse attive</button>
-          </h5>
-        </div>
-        <div id="collapse-pl-commesse" class="collapse show" aria-labelledby="heading-pl-commesse" data-parent="#PL">
-          <div class="input-group my-1">
-            <div class="input-group-prepend col">
-              <div class="pl-3 pr-1">Dal</div>
-              <select id="filter-chart-year-pl-commesse" class="form-control pl-commesse" title="Anno"></select>
-              <select id="filter-chart-month-pl-commesse" class="form-control pl-commesse" title="Mese"></select>
-            </div>
-          </div>
-          <div class="card-body row">
-            <div id="content-data-chart-pl-commesse" class="col"></div>
-          </div>
-        </div>
-      </div>
-      <div class="card"><!-- Dettagli -->
-        <div class="card-header light px-0 py-0" id="heading-pl-dettagli">
-          <h5 class="mb-0">
-            <button class="btn col-12 light" data-toggle="collapse" data-target="#collapse-pl-dettagli" aria-expanded="false" aria-controls="collapse-pl-dettagli">Dettagli</button>
-          </h5>
-        </div>
-        <div id="collapse-pl-dettagli" class="collapse" aria-labelledby="heading-pl-dettagli" data-parent="#PL">
-          <div class="input-group my-1">
-            <div id="filter-chart-input-group" class="input-group-prepend col">
-              <select id="filter-chart-job-pl-dettagli" class="form-control pl-dettagli" title="commesse attive"></select>
-              <div class="pl-3 pr-1">Dal</div>
-              <select id="filter-chart-year-pl-dettagli" class="form-control pl-dettagli" title="Anno"></select>
-              <select id="filter-chart-month-pl-dettagli" class="form-control pl-dettagli" title="Mese"></select>
-            </div>
-          </div>
-          <div class="card-body row">
-            <div id="content-data-chart-pl-dettagli-attività" class="col-sm-6 col-xs-12"></div>
-            <div id="content-data-chart-pl-dettagli-area" class="col-sm-6 col-xs-12"></div>
-            <div id="content-data-chart-pl-dettagli-persone" class="col"></div>
-          </div>
-        </div>
-      </div>
-      <div class="card"><!-- Notifiche -->
-        <div class="card-header light px-0 py-0" id="heading-pl-notifiche">
-          <h5 class="mb-0">
-            <button class="btn col-12 light" data-toggle="collapse" data-target="#collapse-pl-notifiche" aria-expanded="false" aria-controls="collapse-pl-notifiche">Notifiche</button>
-          </h5>
-        </div>
-        <div id="collapse-pl-notifiche" class="collapse" aria-labelledby="heading-pl-notifiche" data-parent="#PL">
-          <div class="card-body"></div>
-        </div>
-      </div>
-    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js"></script> -->
     <!-- SRC BootstrapTable -->
     <script src="/src/bootstrap-table/1.11.1/bootstrap-table.min.js"></script>
     <script src="/src/bootstrap-table/1.11.1/locale/bootstrap-table-en-US.min.js"></script>
     <!-- Chart.js JavaScript -->
     <script src="/js/Chart.min.js"></script>
     <script src="/js/chartjs-plugin-annotation.js"></script>
-    <!-- Lombardini22 JavaScript -->
-    <script>
-      var userId = "{{userId}}"; //console.log("userId: ",userId);
-      var userRole = "{{userRole}}"; //console.log("userRole: ",userRole);
-      var userCompany = "{{userCompany}}"; //console.log("userCompany: ",userCompany);
-      var userArea = "{{area}}";
-      var localApp = "{{localApp}}";
-      var timesheetSqlPath = "{{timesheetSqlPath}}";  //console.log("timesheetSqlPath: ",timesheetSqlPath);
-    </script>
-    <script src="/js/table.js"></script>
-    <script src="/js/timesheet.js"></script>
-    <script src="/js/amministrazione.js"></script>
+    <!-- projectMAB JavaScript -->
+    <script src="/js/viewer.js"></script>
+    <script></script>
   </body>
 </html>
