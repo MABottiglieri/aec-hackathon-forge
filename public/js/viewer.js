@@ -1,39 +1,29 @@
 console.log('starting viewer');
 var initOptions = Autodesk.Viewing.createInitializerOptions();
-
 var viewer;
 
 var documentIds = [
-    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
-    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
-    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' },
-    { "description": "iron-man-helmet", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL2lyb24tbWFuLWhlbG1ldC56aXA' }
+    { "description": "Piping", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyLzEyODRfUkEtTUQwMS0ucnZ0' },
+    { "description": "Elettrico", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyLzEyODRfRUEtTUQwMi0ucnZ0' },
+    { "description": "Meccanico", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL05hdmVfRU1fTWVjXzAyLnJ2dA' },
+    { "description": "Strutturale", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL05hdmVfU3RyLnJ2dA' }
 ];
 var CustomGlobalOffset = [
     { x: 0, y: 0, z: 0 },
-    { x: 100, y: 0, z: 100 },
-    { x: -100, y: 0, z: 100 },
-    { x: 0, y: 0, z: 200 }
+    { x: 0, y: 0, z: 0 },
+    { x: 0, y: 0, z: 0 },
+    { x: 0, y: 0, z: 0 }
 ];
 var documentIndex = 0;
 var OnDocumentIdLoaded = [
     onDoc0Loaded, //onDoc0Loaded
-    onDoc1Loaded, //onDoc1Loaded
+    onLastDocLoaded, //onDoc1Loaded
     onDoc2Loaded,  //onDoc2Loaded
     onLastDocLoaded
 ];
 var documentName = documentIds[documentIndex].description;
 var allDbIds = [];
 var instanceTree = {};
-var StoredInstanceTree = [];
-var StoredAllDbIds = [];
-var searchAttributes = [
-    ["System Name"],
-    ["System Classification"],
-    ["System Type"],
-    ["Keynote"],
-    ["Material"]
-];
 var startDate;
 
 $( document ).ready(function(){
@@ -50,26 +40,17 @@ $( document ).ready(function(){
   });
 });
 function onInitialized() {
-    console.log("VIEWER INITIALIZED");
+    console.log("viewer inizialized");
     var viewerDiv = document.getElementById('MyViewer');
-    var config = Autodesk.Viewing.createViewerConfig(); console.log("config"); console.log(config);
-    config.extensions.push(
-        'Autodesk.InViewerSearch',  //al momento genera una errore in console facendo riferimento alle api v1 (ma funziona)
-        // 'Viewing.Extension.Markup3D',
-        // 'Viewing.Extension.Transform',
-        'Autodesk.Viewing.ZoomWindow'
-        // 'Autodesk.Viewing.Collaboration'
-    );
+    var config = Autodesk.Viewing.createViewerConfig(); console.log("config :",config);
+    config.extensions.push('Autodesk.Viewing.ZoomWindow');
     config.startOnInitialize = true;
     //config.memory = { limit: 400 }; //limite in MB
     viewer = new Autodesk.Viewing.Private.GuiViewer3D(viewerDiv, config);
     viewer.start();
-
     Autodesk.Viewing.Document.load(documentIds[documentIndex].urn, onDocumentLoadSuccess, onDocumentLoadFailure, null);
-
     viewer.addEventListener(Autodesk.Viewing.OBJECT_TREE_CREATED_EVENT, OnObjectTreeCreated);
     viewer.addEventListener(Autodesk.Viewing.GEOMETRY_LOADED_EVENT, OnDocumentIdLoaded[documentIndex]);
-
 };
 
 function onDoc0Loaded() {
@@ -117,7 +98,7 @@ function OnObjectTreeCreated() {
 };
 
 function onDocumentLoadSuccess(doc) {
-    var viewables = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), { 'type': 'geometry' }, true); console.log("viewables"); console.log(viewables);
+    var viewables = Autodesk.Viewing.Document.getSubItemsWithProperties(doc.getRootItem(), { 'type': 'geometry' }, true); console.log("viewables: ",viewables);
     if (viewables.length === 0) { console.error('Document contains no viewables.'); return; }
     else {
         var path = doc.getViewablePath(viewables[0]); //vista iniziale del Viewer (svfUrl)
@@ -131,16 +112,6 @@ function onDocumentLoadSuccess(doc) {
     };
 };
 function onDocumentLoadFailure(viewerErrorCode) { console.error("wasn't possible load the document - errorCode:" + viewerErrorCode); };
-
-function onSuccessCallback() { console.log("onSuccessCallback()"); };
-function onErrorCallback() { console.log("something wrong!"); };
-
-function HowMuchTime(currentDate, currentText) {
-    console.log(currentText + ' execution time: [' + ((new Date()).getTime() - currentDate.getTime()) / 1000 + ' seconds]'); //stampa il tempo di esecuzione del viewer.search
-    $(".spinner").removeClass("Show");
-};
-
-
 
 function getAccessToken(callback){
   $.get('/getAccessToken', function(options) {

@@ -1,8 +1,4 @@
-:root {
-  --gray-01:#cfd8dc;
-}
 body {}
-input{ font-family: FuturaStd-Book }
 
 .red{ background-color: var(--red) }
 .orange{ background-color: var(--orange) }
@@ -12,7 +8,6 @@ input{ font-family: FuturaStd-Book }
 .yellow{ background-color: var(--yellow) }
 .cyan{ background-color: var(--cyan) }
 .light{ background-color: var(--light) }
-.gray01{ background-color: var(--gray-01) }
 
 .pointer {cursor: pointer;}
 .unselectable {
@@ -30,7 +25,7 @@ input{ font-family: FuturaStd-Book }
 }
 
 .docking-panel {
-  top: 60px!important;
+  /* top: 60px!important; */
 }
 
 /*----- Viewer & Containers --------------------------------------*/
