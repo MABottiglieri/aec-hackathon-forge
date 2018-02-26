@@ -3,10 +3,10 @@ var initOptions = Autodesk.Viewing.createInitializerOptions();
 var viewer;
 
 var documentIds = [
-    { "description": "Piping", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyLzEyODRfUkEtTUQwMS0ucnZ0' },
-    { "description": "Elettrico", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyLzEyODRfRUEtTUQwMi0ucnZ0' },
-    { "description": "Meccanico", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL05hdmVfRU1fTWVjXzAyLnJ2dA' },
-    { "description": "Strutturale", "urn": 'urn:dXJuOmFkc2sub2JqZWN0czpvcy5vYmplY3Q6bDIyL05hdmVfU3RyLnJ2dA' }
+    { "description": "xxxxxx", "urn": 'urn:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' },
+    { "description": "xxxxxx", "urn": 'urn:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' },
+    { "description": "xxxxxx", "urn": 'urn:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' },
+    { "description": "xxxxxx", "urn": 'urn:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx' }
 ];
 var CustomGlobalOffset = [
     { x: 0, y: 0, z: 0 },
