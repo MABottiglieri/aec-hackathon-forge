@@ -43,6 +43,6 @@
     "express-fileupload": "^0.4.0",
     "forge-apis": "^0.4.1",
     "hbs": "^4.0.1",
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.19"
   }
 }
