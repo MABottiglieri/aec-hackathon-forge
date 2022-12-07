@@ -39,7 +39,7 @@
   "dependencies": {
     "base64-url": "^2.1.0",
     "body-parser": "^1.18.2",
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "express-fileupload": "^0.4.0",
     "forge-apis": "^0.4.1",
     "hbs": "^4.0.1",
